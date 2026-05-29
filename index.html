@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevZila — Ruby on Rails · React.js · AI Integration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-0: #0a0a0b;
+    --bg-1: #111114;
+    --bg-2: #17171c;
+    --bg-3: #1e1e25;
+    --bg-card: #13131a;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.15);
+    --accent: #c8372d;
+    --accent-soft: rgba(200,55,45,0.15);
+    --accent-glow: rgba(200,55,45,0.08);
+    --text-0: #f0f0f2;
+    --text-1: #a8a8b3;
+    --text-2: #5a5a6a;
+    --rail-red: #c8372d;
+    --closeos-blue: #4f8ef7;
+    --closeos-green: #22d48a;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-0);
+    color: var(--text-0);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    height: 64px;
+    background: rgba(10,10,11,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-0);
+    letter-spacing: -0.02em;
+  }
+
+  .logo-text span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-1);
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-links a:hover { color: var(--text-0); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: #fff !important;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    transition: background 0.2s, transform 0.15s !important;
+  }
+
+  .nav-cta:hover { background: #a82d24 !important; transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(200,55,45,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .hero-badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    color: var(--text-0);
+    margin-bottom: 1.5rem;
+    max-width: 14ch;
+  }
+
+  .hero h1 .line-accent { color: var(--accent); }
+  .hero h1 .line-blue { color: var(--closeos-blue); }
+  .hero h1 .line-purple { color: var(--closeos-green); }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--text-1);
+    max-width: 52ch;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    font-family: var(--font-body);
+  }
+
+  .btn-primary:hover { background: #a82d24; transform: translateY(-2px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-1);
+    padding: 14px 32px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    font-family: var(--font-body);
+  }
+
+  .btn-ghost:hover { border-color: var(--border-hover); color: var(--text-0); transform: translateY(-2px); }
+
+  /* ── TECH STRIP ── */
+  .tech-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-1);
+    overflow: hidden;
+  }
+
+  .tech-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-2);
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+  }
+
+  .tech-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── SERVICES ── */
+  .section {
+    padding: 7rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--text-0);
+    margin-bottom: 1.25rem;
+  }
+
+  .section-sub {
+    font-size: 1.05rem;
+    color: var(--text-1);
+    max-width: 55ch;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 4rem;
+  }
+
+  .service-card {
+    background: var(--bg-card);
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .service-card:hover { background: var(--bg-2); }
+
+  .service-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 22px;
+  }
+
+  .service-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-0);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .service-card p {
+    font-size: 14px;
+    color: var(--text-1);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .service-tag {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  /* ── PRODUCTS / OFFERINGS ── */
+  .offerings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .offering-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+  }
+
+  .offering-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .offering-card.rails::before { background: var(--rail-red); }
+  .offering-card.react::before { background: var(--closeos-blue); }
+  .offering-card.ai::before { background: var(--closeos-green); }
+  .offering-card.full::before { background: linear-gradient(90deg, var(--rail-red), var(--closeos-green)); }
+
+  .offering-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-4px);
+  }
+
+  .offering-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .offering-new {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(34,212,138,0.2);
+    color: var(--closeos-green);
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+
+  .offering-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text-0);
+    margin-bottom: 0.5rem;
+  }
+
+  .offering-card .tagline {
+    font-size: 12px;
+    color: var(--text-2);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    font-family: var(--font-mono);
+  }
+
+  .offering-card p {
+    font-size: 14px;
+    color: var(--text-1);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .offering-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  .offering-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-1);
+  }
+
+  .offering-features li::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .offering-card.rails .offering-features li::before { background: var(--rail-red); }
+  .offering-card.react .offering-features li::before { background: var(--closeos-blue); }
+  .offering-card.ai .offering-features li::before { background: var(--closeos-green); }
+  .offering-card.full .offering-features li::before { background: var(--accent); }
+
+  .offering-cta {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s;
+  }
+
+  .offering-card:hover .offering-cta { gap: 10px; }
+
+  .offering-card.rails .offering-cta { color: var(--rail-red); }
+  .offering-card.react .offering-cta { color: var(--closeos-blue); }
+  .offering-card.ai .offering-cta { color: var(--closeos-green); }
+  .offering-card.full .offering-cta { color: var(--text-0); }
+
+  /* ── INTEGRATIONS (same as closeos.fr) ── */
+  .integrations-section {
+    padding: 6rem 0;
+    background: var(--bg-1);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .integrations-label {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    margin-bottom: 3rem;
+  }
+
+  .marquee-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow: hidden;
+  }
+
+  .marquee-row {
+    display: flex;
+    width: max-content;
+    animation: marquee 28s linear infinite;
+    gap: 1.5rem;
+  }
+
+  .marquee-row.reverse {
+    animation: marquee-reverse 32s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes marquee-reverse {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+
+  .integration-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 10px 20px;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-1);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .integration-chip:hover {
+    border-color: var(--border-hover);
+    color: var(--text-0);
+  }
+
+  .integration-chip img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  .int-icon {
+    width: 20px; height: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  /* ── PROCESS ── */
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+
+  .step {
+    position: relative;
+  }
+
+  .step-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-2);
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .step-line {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .step-line::before {
+    content: '';
+    position: absolute;
+    top: -3px; left: 0;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .step h4 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-0);
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.02em;
+  }
+
+  .step p {
+    font-size: 13px;
+    color: var(--text-1);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── STATS ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 5rem;
+  }
+
+  .stat-box {
+    background: var(--bg-card);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text-0);
+    letter-spacing: -0.05em;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-num span { color: var(--accent); }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--text-2);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── STACK ── */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 4rem;
+  }
+
+  .stack-visual {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-1);
+  }
+
+  .code-comment { color: var(--text-2); }
+  .code-key { color: var(--closeos-blue); }
+  .code-val { color: #f0c070; }
+  .code-str { color: #a8e6a3; }
+  .code-accent { color: var(--closeos-green); }
+
+  .stack-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .stack-feature {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .stack-feature-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+
+  .stack-feature-text h4 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-0);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .stack-feature-text p {
+    font-size: 13px;
+    color: var(--text-1);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .testimonial-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+
+  .testimonial-stars {
+    color: var(--accent);
+    font-size: 14px;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .testimonial-card p {
+    font-size: 14px;
+    color: var(--text-1);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .author-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .author-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-0);
+  }
+
+  .author-role {
+    font-size: 12px;
+    color: var(--text-2);
+  }
+
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin: 0 2rem;
+  }
+
+  .cta-banner::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 500px; height: 300px;
+    background: radial-gradient(ellipse, rgba(200,55,45,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-banner h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--text-0);
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .cta-banner p {
+    font-size: 1.05rem;
+    color: var(--text-1);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    position: relative;
+  }
+
+  .cta-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg-1);
+    border-top: 1px solid var(--border);
+    padding: 4rem 3rem 2rem;
+    margin-top: 6rem;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .footer-brand p {
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.7;
+    margin-top: 1rem;
+    max-width: 32ch;
+    font-weight: 300;
+  }
+
+  .footer-col h5 {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    margin-bottom: 1rem;
+  }
+
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+  .footer-col a {
+    font-size: 14px;
+    color: var(--text-1);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 300;
+  }
+
+  .footer-col a:hover { color: var(--text-0); }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2rem;
+    font-size: 12px;
+    color: var(--text-2);
+  }
+
+  .footer-legal {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .footer-legal a {
+    color: var(--text-2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-legal a:hover { color: var(--text-1); }
+
+  /* ── DIVIDER ── */
+  .full-width-section {
+    width: 100%;
+    padding: 7rem 0;
+  }
+
+  .full-width-section .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="36" height="36" rx="8" fill="#c8372d"/>
+      <path d="M7 7h14c5 0 8 3 8 7s-3 7-8 7H7V7z" fill="white"/>
+      <rect x="7" y="11" width="7" height="6" fill="#c8372d"/>
+      <path d="M7 24h8l8 5H7v-5z" fill="white"/>
+    </svg>
+    <span class="logo-text">Dev<span>Zila</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#integrations">Integrations</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="hero-badge-dot"></span>
+    Ruby on Rails · React.js · AI Integration
+  </div>
+  <h1>
+    We build<br>
+    <span class="line-accent">fast apps.</span><br>
+    <span class="line-blue">Clean code.</span><br>
+    <span class="line-purple">AI-powered.</span>
+  </h1>
+  <p class="hero-sub">
+    Full-stack software development studio specializing in Ruby on Rails backends, React frontends, and AI workflow automation that actually ships.
+  </p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Start a Project →</a>
+    <a href="#services" class="btn-ghost">See Our Work</a>
+  </div>
+</section>
+
+<!-- TECH STRIP -->
+<div class="tech-strip">
+  <div class="tech-pill"><span class="tech-dot" style="background:#c8372d;"></span>Ruby on Rails 8</div>
+  <div class="tech-pill"><span class="tech-dot" style="background:#4f8ef7;"></span>React.js 19</div>
+  <div class="tech-pill"><span class="tech-dot" style="background:#22d48a;"></span>AI / LLM Integration</div>
+  <div class="tech-pill"><span class="tech-dot" style="background:#34d399;"></span>PostgreSQL</div>
+  <div class="tech-pill"><span class="tech-dot" style="background:#f59e0b;"></span>Hotwire / Turbo</div>
+  <div class="tech-pill"><span class="tech-dot" style="background:#818cf8;"></span>Sidekiq</div>
+  <div class="tech-pill"><span class="tech-dot" style="background:#fb923c;"></span>AWS / Heroku</div>
+</div>
+
+<!-- STATS -->
+<div style="background:var(--bg-1); padding: 0 2rem;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="stat-num">80<span>+</span></div>
+        <div class="stat-label">Projects delivered</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">6<span>yr</span></div>
+        <div class="stat-label">Rails expertise</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">40<span>+</span></div>
+        <div class="stat-label">AI integrations shipped</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">98<span>%</span></div>
+        <div class="stat-label">Client satisfaction</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-label">What We Do</div>
+  <h2 class="section-title">End-to-end development,<br>zero bloat</h2>
+  <p class="section-sub">From MVP to production-scale — we cover the full spectrum of modern web development with an opinionated, battle-tested stack.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon" style="background:rgba(200,55,45,0.15);">🛤️</div>
+      <h3>Ruby on Rails Development</h3>
+      <p>Bulletproof backends, RESTful and GraphQL APIs, complex business logic, background jobs, and full-stack Rails apps that scale gracefully.</p>
+      <span class="service-tag" style="background:rgba(200,55,45,0.12); color:var(--rail-red);">Rails · Hotwire · Sidekiq</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="background:rgba(79,142,247,0.1);">⚛️</div>
+      <h3>React.js Frontend</h3>
+      <p>Pixel-perfect UIs, complex SPAs, component libraries, Next.js applications, and seamless Rails API integrations with TypeScript throughout.</p>
+      <span class="service-tag" style="background:rgba(79,142,247,0.1); color:var(--closeos-blue);">React · Next.js · TypeScript</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="background:rgba(34,212,138,0.12);">🤖</div>
+      <h3>AI Workflow Integration</h3>
+      <p>LLM-powered features, RAG pipelines, OpenAI and Anthropic integrations, autonomous agents, and AI automation baked into your existing product.</p>
+      <span class="service-tag" style="background:rgba(34,212,138,0.12); color:var(--closeos-green);">OpenAI · Claude · LangChain</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="background:rgba(52,211,153,0.12);">🗄️</div>
+      <h3>Database Architecture</h3>
+      <p>PostgreSQL schema design, query optimization, data migrations, and caching strategies for high-performance read/write workloads.</p>
+      <span class="service-tag" style="background:rgba(52,211,153,0.12); color:#34d399;">PostgreSQL · Redis · ElasticSearch</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="background:rgba(251,146,60,0.12);">☁️</div>
+      <h3>DevOps & Deployment</h3>
+      <p>CI/CD pipelines, containerization, AWS and Heroku deployment, monitoring, logging, and auto-scaling configurations that just work.</p>
+      <span class="service-tag" style="background:rgba(251,146,60,0.12); color:#fb923c;">Docker · AWS · GitHub Actions</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="background:rgba(129,140,248,0.12);">🔄</div>
+      <h3>Legacy Modernization</h3>
+      <p>Upgrade aging Rails apps, extract monoliths into services, refactor spaghetti code, and migrate jQuery frontends to modern React.</p>
+      <span class="service-tag" style="background:rgba(129,140,248,0.12); color:#818cf8;">Audit · Refactor · Migrate</span>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERINGS -->
+<div style="background:var(--bg-1); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:7rem 2rem;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-label">Our Solutions</div>
+    <h2 class="section-title">Choose your engagement</h2>
+    <p class="section-sub">From focused Rails APIs to full AI-powered platforms — we have a delivery model that fits your stage and budget.</p>
+
+    <div class="offerings-grid">
+      <a href="#contact" class="offering-card rails">
+        <div class="offering-badge" style="background:rgba(200,55,45,0.12); color:var(--rail-red);">
+          <span>🛤</span> Rails Backend
+        </div>
+        <h3>DevZila Rails</h3>
+        <div class="tagline">API · Business Logic · Performance</div>
+        <p>A production-grade Ruby on Rails backend built to last. Ideal for SaaS MVPs, API platforms, and complex data-driven applications with high throughput requirements.</p>
+        <ul class="offering-features">
+          <li>RESTful or GraphQL API design</li>
+          <li>Authentication, RBAC, and multi-tenancy</li>
+          <li>Background processing with Sidekiq</li>
+          <li>Automated testing (RSpec + Cypress)</li>
+        </ul>
+        <span class="offering-cta">Learn more →</span>
+      </a>
+
+      <a href="#contact" class="offering-card react">
+        <div class="offering-badge" style="background:rgba(79,142,247,0.1); color:var(--closeos-blue);">
+          <span>⚛</span> React Frontend
+        </div>
+        <h3>DevZila UI</h3>
+        <div class="tagline">Components · SPA · Performance</div>
+        <p>Modern, fast, and accessible React applications. We design and build complete frontends or drop into your existing product to add features or refactor legacy code.</p>
+        <ul class="offering-features">
+          <li>TypeScript-first component libraries</li>
+          <li>Next.js with SSR and ISR</li>
+          <li>Design-to-code pixel-perfect delivery</li>
+          <li>Storybook documentation included</li>
+        </ul>
+        <span class="offering-cta">Learn more →</span>
+      </a>
+
+      <a href="#contact" class="offering-card ai">
+        <span class="offering-new">New</span>
+        <div class="offering-badge" style="background:rgba(34,212,138,0.12); color:var(--closeos-green);">
+          <span>🤖</span> AI Integration
+        </div>
+        <h3>DevZila AI</h3>
+        <div class="tagline">LLMs · Agents · Automation</div>
+        <p>Embed intelligent automation directly into your Rails or React app. From chatbots to autonomous agents to document processing pipelines — we ship AI that delivers ROI.</p>
+        <ul class="offering-features">
+          <li>RAG pipelines with vector databases</li>
+          <li>Multi-agent orchestration workflows</li>
+          <li>OpenAI, Anthropic, Gemini integrations</li>
+          <li>Streaming responses and tool calling</li>
+        </ul>
+        <span class="offering-cta">Explore AI features →</span>
+      </a>
+
+      <a href="#contact" class="offering-card full">
+        <div class="offering-badge" style="background:rgba(255,255,255,0.06); color:var(--text-1);">
+          <span>🚀</span> Full Stack
+        </div>
+        <h3>DevZila Complete</h3>
+        <div class="tagline">End-to-End · Rails + React + AI</div>
+        <p>From database schema to deployed product. We handle the entire stack — Rails backend, React frontend, AI integrations, DevOps, and ongoing maintenance. One team, full ownership.</p>
+        <ul class="offering-features">
+          <li>Dedicated team of 2–4 developers</li>
+          <li>Weekly sprints with demos</li>
+          <li>Managed infrastructure and monitoring</li>
+          <li>Post-launch support included</li>
+        </ul>
+        <span class="offering-cta">Get started →</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- INTEGRATIONS (same as closeos.fr style) -->
+<section class="integrations-section" id="integrations">
+  <div class="integrations-label">Available Integrations</div>
+
+  <div class="marquee-wrapper">
+    <!-- Row 1 -->
+    <div class="marquee-row" id="row1">
+      <!-- duplicated for seamless loop -->
+    </div>
+    <!-- Row 2 -->
+    <div class="marquee-row reverse" id="row2">
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="section" id="stack">
+  <div class="section-label">Tech Stack</div>
+  <h2 class="section-title">Boring in the best way</h2>
+  <p class="section-sub">We use battle-tested tools that have stood the test of time — not hype-driven frameworks that'll be deprecated next quarter.</p>
+
+  <div class="stack-grid">
+    <div class="stack-visual">
+<span class="code-comment"># devzila_stack.rb</span>
+
+<span class="code-key">stack</span> = {
+  <span class="code-str">backend</span>: {
+    <span class="code-str">framework</span>: <span class="code-val">"Ruby on Rails 8"</span>,
+    <span class="code-str">api</span>: [<span class="code-val">"REST"</span>, <span class="code-val">"GraphQL"</span>],
+    <span class="code-str">jobs</span>: <span class="code-val">"Sidekiq + Redis"</span>,
+    <span class="code-str">realtime</span>: <span class="code-val">"ActionCable / Turbo"</span>,
+  },
+
+  <span class="code-str">frontend</span>: {
+    <span class="code-str">ui</span>: <span class="code-val">"React 19"</span>,
+    <span class="code-str">framework</span>: <span class="code-val">"Next.js 15"</span>,
+    <span class="code-str">language</span>: <span class="code-val">"TypeScript"</span>,
+    <span class="code-str">styling</span>: <span class="code-val">"Tailwind CSS"</span>,
+  },
+
+  <span class="code-str">ai_layer</span>: {
+    <span class="code-str">llms</span>: [<span class="code-val">"Claude"</span>, <span class="code-val">"GPT-4o"</span>],
+    <span class="code-str">vectors</span>: <span class="code-val">"pgvector + Pinecone"</span>,
+    <span class="code-accent">agents</span>: <span class="code-val">"LangChain · n8n · custom"</span>,
+  },
+
+  <span class="code-str">infra</span>: [<span class="code-val">"AWS"</span>, <span class="code-val">"Heroku"</span>, <span class="code-val">"Fly.io"</span>]
+}
+    </div>
+    <ul class="stack-features">
+      <li class="stack-feature">
+        <div class="stack-feature-icon" style="background:rgba(200,55,45,0.12);">🛤️</div>
+        <div class="stack-feature-text">
+          <h4>Rails: convention over configuration</h4>
+          <p>We embrace Rails the way DHH intended — opinionated, fast to ship, and maintainable long-term. No unnecessary abstraction layers.</p>
+        </div>
+      </li>
+      <li class="stack-feature">
+        <div class="stack-feature-icon" style="background:rgba(79,142,247,0.1);">⚛️</div>
+        <div class="stack-feature-text">
+          <h4>React: composable and typed</h4>
+          <p>TypeScript-first, server component aware, and built with reusability in mind. We write React code you'll want to maintain a year later.</p>
+        </div>
+      </li>
+      <li class="stack-feature">
+        <div class="stack-feature-icon" style="background:rgba(34,212,138,0.12);">🧠</div>
+        <div class="stack-feature-text">
+          <h4>AI: integrated, not bolted on</h4>
+          <p>We architect AI features from day one — not as an afterthought. Streaming, tool calling, RAG, and agentic workflows woven into your data model.</p>
+        </div>
+      </li>
+      <li class="stack-feature">
+        <div class="stack-feature-icon" style="background:rgba(52,211,153,0.1);">🔒</div>
+        <div class="stack-feature-text">
+          <h4>Security and performance first</h4>
+          <p>N+1 queries eliminated, rate limiting, OWASP compliance, and automated security scanning in every CI pipeline we set up.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<div style="background:var(--bg-1); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:7rem 2rem;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-label">How We Work</div>
+    <h2 class="section-title">From brief to shipped</h2>
+
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">01 — DISCOVERY</div>
+        <div class="step-line"></div>
+        <h4>Scope & Architecture</h4>
+        <p>We audit your requirements, map the data model, and write a technical brief before any code gets written. No surprises later.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02 — BUILD</div>
+        <div class="step-line"></div>
+        <h4>Weekly Sprint Cycles</h4>
+        <p>Two-week sprints with a demo at the end of each. You see working software constantly — not a big reveal at month three.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03 — REVIEW</div>
+        <div class="step-line"></div>
+        <h4>Code Review & QA</h4>
+        <p>Every PR reviewed, every feature tested. We write RSpec and Cypress tests alongside feature code — not as an afterthought.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04 — SHIP</div>
+        <div class="step-line"></div>
+        <h4>Deploy & Support</h4>
+        <p>Zero-downtime deploys, monitoring setup, and a 30-day support window after launch. We don't disappear after handover.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="work">
+  <div class="section-label">Client Stories</div>
+  <h2 class="section-title">What our clients say</h2>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p>"DevZila took our messy Rails 5 app and turned it into a clean, fast Rails 8 platform in three months. The AI features they added have saved our team 20 hours a week."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#c8372d;">SR</div>
+        <div>
+          <div class="author-name">Sarah R.</div>
+          <div class="author-role">CTO, PropTech SaaS</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p>"The React component library they built for us is something I'm genuinely proud to show other engineers. TypeScript, Storybook, accessible — exactly what we needed."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#4f8ef7;">JM</div>
+        <div>
+          <div class="author-name">James M.</div>
+          <div class="author-role">VP Engineering, FinTech</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p>"We went from idea to live product in 8 weeks. The AI document processing pipeline they built is core to our business now. Couldn't have done it without DevZila."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#22d48a;">AK</div>
+        <div>
+          <div class="author-name">Amara K.</div>
+          <div class="author-role">Founder, LegalTech Startup</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div style="padding:4rem 2rem; max-width:1200px; margin:0 auto;" id="contact">
+  <div class="cta-banner">
+    <div class="section-label" style="margin-bottom:1rem;">Ready to build?</div>
+    <h2>Let's ship something great<br>together.</h2>
+    <p>Tell us what you're building and we'll get back within 24 hours with a brief + estimate.</p>
+    <div class="cta-actions">
+      <a href="mailto:hello@devzila.com" class="btn-primary">hello@devzila.com →</a>
+      <a href="#services" class="btn-ghost">View Services</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" style="text-decoration:none;">
+          <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="36" height="36" rx="8" fill="#c8372d"/>
+            <path d="M7 7h14c5 0 8 3 8 7s-3 7-8 7H7V7z" fill="white"/>
+            <rect x="7" y="11" width="7" height="6" fill="#c8372d"/>
+            <path d="M7 24h8l8 5H7v-5z" fill="white"/>
+          </svg>
+          <span class="logo-text">Dev<span>Zila</span></span>
+        </a>
+        <p>Software development studio specializing in Ruby on Rails, React.js, and AI-powered web applications.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#">Rails Development</a></li>
+          <li><a href="#">React Frontend</a></li>
+          <li><a href="#">AI Integration</a></li>
+          <li><a href="#">Full Stack</a></li>
+          <li><a href="#">Modernization</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Our Work</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Stack</h5>
+        <ul>
+          <li><a href="#">Ruby on Rails</a></li>
+          <li><a href="#">React & Next.js</a></li>
+          <li><a href="#">PostgreSQL</a></li>
+          <li><a href="#">OpenAI / Anthropic</a></li>
+          <li><a href="#">AWS / Heroku</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 DevZila · devzila.com</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="mailto:hello@devzila.com">hello@devzila.com</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Integration chips data ──
+const row1Integrations = [
+  { name: "GitHub", color: "#24292e", letter: "GH" },
+  { name: "Stripe", color: "#635bff", letter: "St" },
+  { name: "HubSpot", color: "#ff7a59", letter: "HS" },
+  { name: "OpenAI", color: "#10a37f", letter: "AI" },
+  { name: "Anthropic", color: "#b5543e", letter: "An" },
+  { name: "Slack", color: "#4a154b", letter: "Sl" },
+  { name: "Zapier", color: "#ff4a00", letter: "Za" },
+  { name: "Twilio", color: "#f22f46", letter: "Tw" },
+  { name: "SendGrid", color: "#1a82e2", letter: "SG" },
+  { name: "AWS S3", color: "#ff9900", letter: "S3" },
+  { name: "Heroku", color: "#430098", letter: "Hk" },
+  { name: "Cloudinary", color: "#3448c5", letter: "Cl" },
+];
+
+const row2Integrations = [
+  { name: "PostgreSQL", color: "#336791", letter: "PG" },
+  { name: "Redis", color: "#dc382d", letter: "Re" },
+  { name: "Sidekiq", color: "#b01e1e", letter: "Sq" },
+  { name: "n8n", color: "#ea4b71", letter: "n8" },
+  { name: "Make", color: "#6d04d7", letter: "Mk" },
+  { name: "Pinecone", color: "#1c1c2e", letter: "Pi" },
+  { name: "Algolia", color: "#003dff", letter: "Al" },
+  { name: "Mixpanel", color: "#7856ff", letter: "Mx" },
+  { name: "Sentry", color: "#362d59", letter: "Se" },
+  { name: "Datadog", color: "#632ca6", letter: "DD" },
+  { name: "Docker", color: "#2496ed", letter: "Dk" },
+  { name: "Figma", color: "#f24e1e", letter: "Fi" },
+];
+
+function buildChip(int) {
+  return `<div class="integration-chip">
+    <div class="int-icon" style="background:${int.color};">${int.letter}</div>
+    ${int.name}
+  </div>`;
+}
+
+function buildRow(integrations) {
+  // duplicate for infinite scroll
+  const chips = [...integrations, ...integrations].map(buildChip).join('');
+  return chips;
+}
+
+document.getElementById('row1').innerHTML = buildRow(row1Integrations);
+document.getElementById('row2').innerHTML = buildRow(row2Integrations);
+</script>
+</body>
+</html>
