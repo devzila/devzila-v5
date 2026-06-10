@@ -38,4 +38,10 @@ return [
         'password'   => 'smtp_password',
         'timeout'    => 15,             // seconds
     ],
+
+    // ── Admin panel (HTTP Basic Auth) ──
+    'admin' => [
+        'user' => 'admin',
+        'pass' => 'change-this-password',
+    ],
 ];

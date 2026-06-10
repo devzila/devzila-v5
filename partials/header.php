@@ -63,7 +63,7 @@ $navServicesHref = $navServicesHref ?? '/#services';
       </div>
     </li>
     <li class="hide-mobile"><a href="why-devzila">Why DevZila</a></li>
-    <li class="hide-mobile"><a href="/#stack">Stack</a></li>
+    <li class="hide-mobile"><a href="blog">Blog</a></li>
     <li class="hide-mobile"><a href="/#work">Work</a></li>
     <li><a href="hire-us" class="nav-cta">Hire Us</a></li>
   </ul>
