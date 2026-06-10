@@ -87,6 +87,70 @@
   }
   .nav-cta:hover { background: #e6e6e9 !important; transform: translateY(-1px); }
 
+  /* ── SERVICES DROPDOWN ── */
+  .nav-links > li { position: relative; }
+  .nav-dropdown > a { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+  .nav-dropdown > a::after {
+    content: '';
+    width: 6px; height: 6px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg) translateY(-1px);
+    transition: transform 0.2s;
+  }
+  .nav-dropdown:hover > a::after { transform: rotate(225deg) translateY(-1px); }
+
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    min-width: 540px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 2rem;
+    padding: 1.5rem;
+    background: var(--bg-1);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  }
+  .nav-dropdown:hover .dropdown-menu,
+  .nav-dropdown:focus-within .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+  .dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -14px; left: 0; right: 0;
+    height: 14px;
+  }
+  .dropdown-group h6 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    margin-bottom: 0.75rem;
+    padding-left: 0.75rem;
+  }
+  .dropdown-group a {
+    display: block;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-1);
+    transition: background 0.15s, color 0.15s;
+  }
+  .dropdown-group a:hover { background: var(--bg-3); color: var(--text-0); }
+
   /* ── BUTTONS ── */
   .btn-primary {
     background: #ffffff;
@@ -339,9 +403,26 @@
     <span class="logo-text">Dev<span>Zila</span></span>
   </a>
   <ul class="nav-links">
-    <li><a href="index.html#services">Services</a></li>
+    <li class="nav-dropdown">
+      <a href="index.html#services" aria-haspopup="true">Services</a>
+      <div class="dropdown-menu">
+        <div class="dropdown-group">
+          <h6>Development</h6>
+          <a href="rails-development.html">Ruby on Rails Development</a>
+          <a href="rails-upgrades.html">Ruby on Rails Upgrades</a>
+          <a href="fintech-solutions.html">Fintech Solutions</a>
+          <a href="frontend-development.html">Frontend Development</a>
+        </div>
+        <div class="dropdown-group">
+          <h6>Workshops &amp; Mentoring</h6>
+          <a href="ddd-workshops.html">DDD Workshops</a>
+          <a href="event-storming-workshops.html">Event Storming Workshops</a>
+          <a href="code-mentoring.html">Code Mentoring</a>
+          <a href="hotwire-workshop.html">Hotwire Workshop</a>
+        </div>
+      </div>
+    </li>
     <li><a href="index.html#stack">Stack</a></li>
-    <li><a href="index.html#integrations">Integrations</a></li>
     <li><a href="index.html#work">Work</a></li>
     <li><a href="hire-us.html" class="nav-cta">Hire Us</a></li>
   </ul>
