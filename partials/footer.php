@@ -26,29 +26,29 @@ $extraScripts = $extraScripts ?? '';
       <div class="footer-col">
         <h5>Development</h5>
         <ul>
-          <li><a href="rails-development">Rails Development</a></li>
-          <li><a href="rails-upgrades">Rails Upgrades</a></li>
-          <li><a href="fintech-solutions">Fintech Solutions</a></li>
-          <li><a href="frontend-development">Frontend Development</a></li>
+          <li><a href="/rails-development">Rails Development</a></li>
+          <li><a href="/rails-upgrades">Rails Upgrades</a></li>
+          <li><a href="/fintech-solutions">Fintech Solutions</a></li>
+          <li><a href="/frontend-development">Frontend Development</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Workshops</h5>
         <ul>
-          <li><a href="ddd-workshops">DDD Workshops</a></li>
-          <li><a href="event-storming-workshops">Event Storming</a></li>
-          <li><a href="code-mentoring">Code Mentoring</a></li>
-          <li><a href="hotwire-workshop">Hotwire Workshop</a></li>
+          <li><a href="/ddd-workshops">DDD Workshops</a></li>
+          <li><a href="/event-storming-workshops">Event Storming</a></li>
+          <li><a href="/code-mentoring">Code Mentoring</a></li>
+          <li><a href="/hotwire-workshop">Hotwire Workshop</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Company</h5>
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="why-devzila">Why DevZila</a></li>
-          <li><a href="blog">Blog</a></li>
+          <li><a href="/why-devzila">Why DevZila</a></li>
+          <li><a href="/blog">Blog</a></li>
           <li><a href="/#work">Our Work</a></li>
-          <li><a href="hire-us">Hire Us</a></li>
+          <li><a href="/hire-us">Hire Us</a></li>
           <li><a href="mailto:hello@devzila.com">Contact</a></li>
         </ul>
       </div>

@@ -25,7 +25,7 @@ $navServicesHref = $navServicesHref ?? '/#services';
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <?php if ($useSiteCss): ?>
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="/assets/site.css">
 <?php endif; ?>
 <?= $extraHead ?>
 </head>
@@ -48,23 +48,23 @@ $navServicesHref = $navServicesHref ?? '/#services';
       <div class="dropdown-menu">
         <div class="dropdown-group">
           <h6>Development</h6>
-          <a href="rails-development">Ruby on Rails Development</a>
-          <a href="rails-upgrades">Ruby on Rails Upgrades</a>
-          <a href="fintech-solutions">Fintech Solutions</a>
-          <a href="frontend-development">Frontend Development</a>
+          <a href="/rails-development">Ruby on Rails Development</a>
+          <a href="/rails-upgrades">Ruby on Rails Upgrades</a>
+          <a href="/fintech-solutions">Fintech Solutions</a>
+          <a href="/frontend-development">Frontend Development</a>
         </div>
         <div class="dropdown-group">
           <h6>Workshops &amp; Mentoring</h6>
-          <a href="ddd-workshops">DDD Workshops</a>
-          <a href="event-storming-workshops">Event Storming Workshops</a>
-          <a href="code-mentoring">Code Mentoring</a>
-          <a href="hotwire-workshop">Hotwire Workshop</a>
+          <a href="/ddd-workshops">DDD Workshops</a>
+          <a href="/event-storming-workshops">Event Storming Workshops</a>
+          <a href="/code-mentoring">Code Mentoring</a>
+          <a href="/hotwire-workshop">Hotwire Workshop</a>
         </div>
       </div>
     </li>
-    <li class="hide-mobile"><a href="why-devzila">Why DevZila</a></li>
-    <li class="hide-mobile"><a href="blog">Blog</a></li>
+    <li class="hide-mobile"><a href="/why-devzila">Why DevZila</a></li>
+    <li class="hide-mobile"><a href="/blog">Blog</a></li>
     <li class="hide-mobile"><a href="/#work">Work</a></li>
-    <li><a href="hire-us" class="nav-cta">Hire Us</a></li>
+    <li><a href="/hire-us" class="nav-cta">Hire Us</a></li>
   </ul>
 </nav>
