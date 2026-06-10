@@ -45,6 +45,7 @@ $extraScripts = $extraScripts ?? '';
         <h5>Company</h5>
         <ul>
           <li><a href="/">Home</a></li>
+          <li><a href="why-devzila">Why DevZila</a></li>
           <li><a href="/#work">Our Work</a></li>
           <li><a href="hire-us">Hire Us</a></li>
           <li><a href="mailto:hello@devzila.com">Contact</a></li>
