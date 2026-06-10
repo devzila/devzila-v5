@@ -22,7 +22,7 @@ require __DIR__ . '/partials/header.php';
     Deep expertise in Domain-Driven Design, event sourcing, and legacy code modernization. We go beyond code - we understand your business. We share our know-how through world-class Ruby on Rails education.
   </p>
   <div class="hero-actions">
-    <a href="hire-us.php" class="btn-primary">Start a Project →</a>
+    <a href="hire-us" class="btn-primary">Start a Project →</a>
     <a href="#services" class="btn-ghost">See Our Work</a>
   </div>
 </section>
@@ -387,7 +387,7 @@ require __DIR__ . '/partials/header.php';
     <h2>Ready to dive deeper into your<br>Ruby on Rails based business?</h2>
     <p>Let's discuss how we can help you.</p>
     <div class="cta-actions">
-      <a href="hire-us.php" class="btn-primary">Reach out to us now →</a>
+      <a href="hire-us" class="btn-primary">Reach out to us now →</a>
     </div>
   </div>
 </div>

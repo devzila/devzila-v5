@@ -13,7 +13,7 @@ $pageTitle       = $pageTitle       ?? 'DevZila — Ruby on Rails · React.js ·
 $pageDescription = $pageDescription ?? 'DevZila is a software development studio specializing in Ruby on Rails, React.js, and AI-powered web applications.';
 $useSiteCss      = $useSiteCss      ?? true;
 $extraHead       = $extraHead       ?? '';
-$navServicesHref = $navServicesHref ?? 'index.php#services';
+$navServicesHref = $navServicesHref ?? '/#services';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +33,7 @@ $navServicesHref = $navServicesHref ?? 'index.php#services';
 
 <!-- NAV -->
 <nav>
-  <a href="index.php" class="nav-logo">
+  <a href="/" class="nav-logo">
     <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="36" height="36" rx="8" fill="rgb(66 101 164)"/>
       <path d="M7 7h14c5 0 8 3 8 7s-3 7-8 7H7V7z" fill="white"/>
@@ -48,22 +48,22 @@ $navServicesHref = $navServicesHref ?? 'index.php#services';
       <div class="dropdown-menu">
         <div class="dropdown-group">
           <h6>Development</h6>
-          <a href="rails-development.php">Ruby on Rails Development</a>
-          <a href="rails-upgrades.php">Ruby on Rails Upgrades</a>
-          <a href="fintech-solutions.php">Fintech Solutions</a>
-          <a href="frontend-development.php">Frontend Development</a>
+          <a href="rails-development">Ruby on Rails Development</a>
+          <a href="rails-upgrades">Ruby on Rails Upgrades</a>
+          <a href="fintech-solutions">Fintech Solutions</a>
+          <a href="frontend-development">Frontend Development</a>
         </div>
         <div class="dropdown-group">
           <h6>Workshops &amp; Mentoring</h6>
-          <a href="ddd-workshops.php">DDD Workshops</a>
-          <a href="event-storming-workshops.php">Event Storming Workshops</a>
-          <a href="code-mentoring.php">Code Mentoring</a>
-          <a href="hotwire-workshop.php">Hotwire Workshop</a>
+          <a href="ddd-workshops">DDD Workshops</a>
+          <a href="event-storming-workshops">Event Storming Workshops</a>
+          <a href="code-mentoring">Code Mentoring</a>
+          <a href="hotwire-workshop">Hotwire Workshop</a>
         </div>
       </div>
     </li>
-    <li class="hide-mobile"><a href="index.php#stack">Stack</a></li>
-    <li class="hide-mobile"><a href="index.php#work">Work</a></li>
-    <li><a href="hire-us.php" class="nav-cta">Hire Us</a></li>
+    <li class="hide-mobile"><a href="/#stack">Stack</a></li>
+    <li class="hide-mobile"><a href="/#work">Work</a></li>
+    <li><a href="hire-us" class="nav-cta">Hire Us</a></li>
   </ul>
 </nav>

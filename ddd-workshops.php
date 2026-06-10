@@ -1,17 +1,17 @@
 <?php
 $pageTitle = 'Domain-Driven Design Workshop — DevZila';
 $pageDescription = 'A hands-on Rails + Domain-Driven Design workshop covering aggregates, domain events, and event sourcing.';
-$navServicesHref = 'index.php#services';
+$navServicesHref = '/#services';
 require __DIR__ . '/partials/header.php';
 ?>
 
 <header class="svc-header">
-  <div class="breadcrumb"><a href="index.php">Home</a> · <a href="index.php#services">Services</a> · DDD Workshops</div>
+  <div class="breadcrumb"><a href="/">Home</a> · <a href="/#services">Services</a> · DDD Workshops</div>
   <div class="svc-label">Workshops &amp; Mentoring</div>
   <h1>Rails + Domain-Driven Design Workshop</h1>
   <p>Make your development team understand the principles of Domain-Driven Design and master the most powerful design approach in today's world of complex business rules. A practical, hands-on workshop built around real code.</p>
   <div class="header-actions">
-    <a href="hire-us.php" class="btn-primary">Book this workshop →</a>
+    <a href="hire-us" class="btn-primary">Book this workshop →</a>
     <a href="#agenda" class="btn-ghost">See agenda</a>
   </div>
 </header>
@@ -68,7 +68,7 @@ require __DIR__ . '/partials/header.php';
   <h2>Level up your team with DDD</h2>
   <p>Run this workshop for your team, in-house or remote. Let's tailor it to your domain.</p>
   <div class="cta-actions">
-    <a href="hire-us.php" class="btn-primary">Hire Us →</a>
+    <a href="hire-us" class="btn-primary">Hire Us →</a>
     <a href="https://calendly.com/nilayanand/15min" target="_blank" rel="noopener noreferrer" class="btn-ghost">Book a call</a>
   </div>
 </div>

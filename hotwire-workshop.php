@@ -1,17 +1,17 @@
 <?php
 $pageTitle = 'Hotwire Workshop — DevZila';
 $pageDescription = 'Learn to build reactive Rails apps with Hotwire — Turbo and Stimulus — and little custom JavaScript.';
-$navServicesHref = 'index.php#services';
+$navServicesHref = '/#services';
 require __DIR__ . '/partials/header.php';
 ?>
 
 <header class="svc-header">
-  <div class="breadcrumb"><a href="index.php">Home</a> · <a href="index.php#services">Services</a> · Hotwire Workshop</div>
+  <div class="breadcrumb"><a href="/">Home</a> · <a href="/#services">Services</a> · Hotwire Workshop</div>
   <div class="svc-label">Workshops &amp; Mentoring</div>
   <h1>Hotwire Workshop</h1>
   <p>Build fast, reactive Rails applications with Hotwire — Turbo and Stimulus — and minimal custom JavaScript. Learn how to deliver modern UX while keeping your frontend simple and maintainable.</p>
   <div class="header-actions">
-    <a href="hire-us.php" class="btn-primary">Book this workshop →</a>
+    <a href="hire-us" class="btn-primary">Book this workshop →</a>
     <a href="#what" class="btn-ghost">What we do</a>
   </div>
 </header>
@@ -67,7 +67,7 @@ require __DIR__ . '/partials/header.php';
   <h2>Make your Rails app reactive — the simple way</h2>
   <p>Run this Hotwire workshop with your team, remote or on-site.</p>
   <div class="cta-actions">
-    <a href="hire-us.php" class="btn-primary">Hire Us →</a>
+    <a href="hire-us" class="btn-primary">Hire Us →</a>
     <a href="https://calendly.com/nilayanand/15min" target="_blank" rel="noopener noreferrer" class="btn-ghost">Book a call</a>
   </div>
 </div>

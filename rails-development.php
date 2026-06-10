@@ -1,17 +1,17 @@
 <?php
 $pageTitle = 'Ruby on Rails Development — DevZila';
 $pageDescription = 'We rescue legacy Ruby on Rails applications and build new ones that scale with your business.';
-$navServicesHref = 'index.php#services';
+$navServicesHref = '/#services';
 require __DIR__ . '/partials/header.php';
 ?>
 
 <header class="svc-header">
-  <div class="breadcrumb"><a href="index.php">Home</a> · <a href="index.php#services">Services</a> · Ruby on Rails Development</div>
+  <div class="breadcrumb"><a href="/">Home</a> · <a href="/#services">Services</a> · Ruby on Rails Development</div>
   <div class="svc-label">Development</div>
   <h1>Ruby on Rails Development</h1>
   <p>We save legacy Ruby on Rails applications from collapsing and improve them to support your business growth. Whether it's hard to add new functionality or the application needs performance optimization, we'll get it back on the right track and support you with every next step.</p>
   <div class="header-actions">
-    <a href="hire-us.php" class="btn-primary">Start a Project →</a>
+    <a href="hire-us" class="btn-primary">Start a Project →</a>
     <a href="#what" class="btn-ghost">What we do</a>
   </div>
 </header>
@@ -67,7 +67,7 @@ require __DIR__ . '/partials/header.php';
   <h2>Ready to get your Rails app back on track?</h2>
   <p>Let's discuss your project, your goals, and how we can bring value to your business.</p>
   <div class="cta-actions">
-    <a href="hire-us.php" class="btn-primary">Hire Us →</a>
+    <a href="hire-us" class="btn-primary">Hire Us →</a>
     <a href="https://calendly.com/nilayanand/15min" target="_blank" rel="noopener noreferrer" class="btn-ghost">Book a call</a>
   </div>
 </div>

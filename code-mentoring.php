@@ -1,17 +1,17 @@
 <?php
 $pageTitle = 'Code Mentoring — DevZila';
 $pageDescription = 'One-on-one and team mentoring to level up your developers in Rails, testing, and DDD.';
-$navServicesHref = 'index.php#services';
+$navServicesHref = '/#services';
 require __DIR__ . '/partials/header.php';
 ?>
 
 <header class="svc-header">
-  <div class="breadcrumb"><a href="index.php">Home</a> · <a href="index.php#services">Services</a> · Code Mentoring</div>
+  <div class="breadcrumb"><a href="/">Home</a> · <a href="/#services">Services</a> · Code Mentoring</div>
   <div class="svc-label">Workshops &amp; Mentoring</div>
   <h1>Code Mentoring</h1>
   <p>Level up your developers with hands-on mentoring from senior engineers. We work alongside your team — pairing, reviewing, and guiding — so good practices stick long after the engagement ends.</p>
   <div class="header-actions">
-    <a href="hire-us.php" class="btn-primary">Start mentoring →</a>
+    <a href="hire-us" class="btn-primary">Start mentoring →</a>
     <a href="#what" class="btn-ghost">What we do</a>
   </div>
 </header>
@@ -67,7 +67,7 @@ require __DIR__ . '/partials/header.php';
   <h2>Invest in your developers</h2>
   <p>Let's design a mentoring plan that fits your team's goals and schedule.</p>
   <div class="cta-actions">
-    <a href="hire-us.php" class="btn-primary">Hire Us →</a>
+    <a href="hire-us" class="btn-primary">Hire Us →</a>
     <a href="https://calendly.com/nilayanand/15min" target="_blank" rel="noopener noreferrer" class="btn-ghost">Book a call</a>
   </div>
 </div>

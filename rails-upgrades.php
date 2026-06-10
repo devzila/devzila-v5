@@ -1,17 +1,17 @@
 <?php
 $pageTitle = 'Ruby on Rails Upgrades — DevZila';
 $pageDescription = 'Seamless migrations to the latest Ruby and Rails versions with minimal downtime and maximum reliability.';
-$navServicesHref = 'index.php#services';
+$navServicesHref = '/#services';
 require __DIR__ . '/partials/header.php';
 ?>
 
 <header class="svc-header">
-  <div class="breadcrumb"><a href="index.php">Home</a> · <a href="index.php#services">Services</a> · Ruby on Rails Upgrades</div>
+  <div class="breadcrumb"><a href="/">Home</a> · <a href="/#services">Services</a> · Ruby on Rails Upgrades</div>
   <div class="svc-label">Development</div>
   <h1>Ruby on Rails Upgrades</h1>
   <p>Keeping your Rails app up-to-date is crucial for security and performance. We handle seamless migrations to the latest Ruby and Rails versions, ensuring minimal downtime and maximum reliability.</p>
   <div class="header-actions">
-    <a href="hire-us.php" class="btn-primary">Plan my upgrade →</a>
+    <a href="hire-us" class="btn-primary">Plan my upgrade →</a>
     <a href="#what" class="btn-ghost">What we do</a>
   </div>
 </header>
@@ -67,7 +67,7 @@ require __DIR__ . '/partials/header.php';
   <h2>Stuck on an old version of Rails?</h2>
   <p>Let's map out a safe path to the latest Ruby and Rails.</p>
   <div class="cta-actions">
-    <a href="hire-us.php" class="btn-primary">Hire Us →</a>
+    <a href="hire-us" class="btn-primary">Hire Us →</a>
     <a href="https://calendly.com/nilayanand/15min" target="_blank" rel="noopener noreferrer" class="btn-ghost">Book a call</a>
   </div>
 </div>

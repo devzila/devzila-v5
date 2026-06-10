@@ -3,7 +3,7 @@ $pageTitle = 'Hire Us — DevZila Ruby on Rails Development Team';
 $pageDescription = "Tell us about your project. We'll get back within 24 hours with a brief and estimate.";
 $useSiteCss = false;
 $extraHead = '<link rel="stylesheet" href="assets/hire-us.css">';
-$navServicesHref = 'index.php#services';
+$navServicesHref = '/#services';
 require __DIR__ . '/partials/header.php';
 ?>
 <!-- HEADER -->
@@ -21,7 +21,7 @@ require __DIR__ . '/partials/header.php';
 
     <div id="formStatus" class="form-status"></div>
 
-    <form id="hireForm" action="submit-hire.php" method="post" novalidate>
+    <form id="hireForm" action="submit-hire" method="post" novalidate>
       <!-- honeypot anti-spam field -->
       <div class="hp-field" aria-hidden="true">
         <label>Leave this field empty

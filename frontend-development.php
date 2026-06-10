@@ -1,17 +1,17 @@
 <?php
 $pageTitle = 'Frontend Development — DevZila';
 $pageDescription = 'Modern, responsive UIs with React and Hotwire that integrate seamlessly with Rails backends.';
-$navServicesHref = 'index.php#services';
+$navServicesHref = '/#services';
 require __DIR__ . '/partials/header.php';
 ?>
 
 <header class="svc-header">
-  <div class="breadcrumb"><a href="index.php">Home</a> · <a href="index.php#services">Services</a> · Frontend Development</div>
+  <div class="breadcrumb"><a href="/">Home</a> · <a href="/#services">Services</a> · Frontend Development</div>
   <div class="svc-label">Development</div>
   <h1>Frontend Development</h1>
   <p>We craft modern, responsive UIs that integrate seamlessly with Rails backends. Our expertise covers both React and Hotwire — and we help teams transition from React to Hotwire to simplify their frontend architecture while keeping a great user experience.</p>
   <div class="header-actions">
-    <a href="hire-us.php" class="btn-primary">Start a Project →</a>
+    <a href="hire-us" class="btn-primary">Start a Project →</a>
     <a href="#what" class="btn-ghost">What we do</a>
   </div>
 </header>
@@ -67,7 +67,7 @@ require __DIR__ . '/partials/header.php';
   <h2>Need a frontend that keeps up with your backend?</h2>
   <p>Let's build an interface that's fast, polished, and easy to maintain.</p>
   <div class="cta-actions">
-    <a href="hire-us.php" class="btn-primary">Hire Us →</a>
+    <a href="hire-us" class="btn-primary">Hire Us →</a>
     <a href="https://calendly.com/nilayanand/15min" target="_blank" rel="noopener noreferrer" class="btn-ghost">Book a call</a>
   </div>
 </div>

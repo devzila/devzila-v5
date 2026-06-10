@@ -1,17 +1,17 @@
 <?php
 $pageTitle = 'Fintech Solutions — DevZila';
 $pageDescription = 'Secure, compliant, event-driven financial software with accurate accounting and full audit trails.';
-$navServicesHref = 'index.php#services';
+$navServicesHref = '/#services';
 require __DIR__ . '/partials/header.php';
 ?>
 
 <header class="svc-header">
-  <div class="breadcrumb"><a href="index.php">Home</a> · <a href="index.php#services">Services</a> · Fintech Solutions</div>
+  <div class="breadcrumb"><a href="/">Home</a> · <a href="/#services">Services</a> · Fintech Solutions</div>
   <div class="svc-label">Development</div>
   <h1>Fintech Solutions</h1>
   <p>Financial software demands correctness, security, and a complete audit trail. We build event-driven fintech systems with accurate accounting and provable data integrity — the kind of rigor money requires.</p>
   <div class="header-actions">
-    <a href="hire-us.php" class="btn-primary">Discuss your project →</a>
+    <a href="hire-us" class="btn-primary">Discuss your project →</a>
     <a href="#what" class="btn-ghost">What we do</a>
   </div>
 </header>
@@ -67,7 +67,7 @@ require __DIR__ . '/partials/header.php';
   <h2>Building something in fintech?</h2>
   <p>Let's talk about correctness, compliance, and scale from day one.</p>
   <div class="cta-actions">
-    <a href="hire-us.php" class="btn-primary">Hire Us →</a>
+    <a href="hire-us" class="btn-primary">Hire Us →</a>
     <a href="https://calendly.com/nilayanand/15min" target="_blank" rel="noopener noreferrer" class="btn-ghost">Book a call</a>
   </div>
 </div>
