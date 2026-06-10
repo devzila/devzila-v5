@@ -21,6 +21,109 @@ function respond(bool $success, string $message, int $status = 200): void
     exit;
 }
 
+/**
+ * Minimal, dependency-free SMTP mailer.
+ * Supports STARTTLS (port 587), implicit SSL (port 465) and AUTH LOGIN.
+ *
+ * @throws RuntimeException on any protocol/connection failure.
+ */
+function send_via_smtp(array $smtp, string $fromEmail, string $fromName, string $to, string $replyName, string $replyEmail, string $subject, string $body): void
+{
+    $timeout    = (int)($smtp['timeout'] ?? 15);
+    $encryption = strtolower((string)($smtp['encryption'] ?? 'tls'));
+    $host       = $smtp['host'];
+    $port       = (int)$smtp['port'];
+
+    $transport = ($encryption === 'ssl') ? "ssl://{$host}" : $host;
+
+    $errno = 0; $errstr = '';
+    $fp = @stream_socket_client(
+        "{$transport}:{$port}",
+        $errno,
+        $errstr,
+        $timeout,
+        STREAM_CLIENT_CONNECT
+    );
+    if (!$fp) {
+        throw new RuntimeException("SMTP connect failed: {$errstr} ({$errno})");
+    }
+    stream_set_timeout($fp, $timeout);
+
+    // Read a (possibly multi-line) SMTP reply and assert the expected code.
+    $read = static function () use ($fp): string {
+        $data = '';
+        while (($line = fgets($fp, 515)) !== false) {
+            $data .= $line;
+            // Lines like "250-..." continue; "250 ..." ends the reply.
+            if (isset($line[3]) && $line[3] === ' ') {
+                break;
+            }
+        }
+        return $data;
+    };
+    $expect = static function (string $reply, string $code) {
+        if (strncmp($reply, $code, strlen($code)) !== 0) {
+            throw new RuntimeException('Unexpected SMTP reply: ' . trim($reply));
+        }
+    };
+    $write = static function (string $cmd) use ($fp): void {
+        fwrite($fp, $cmd . "\r\n");
+    };
+
+    $expect($read(), '220');
+
+    $hostname = $_SERVER['SERVER_NAME'] ?? gethostname() ?: 'localhost';
+
+    $write('EHLO ' . $hostname);
+    $expect($read(), '250');
+
+    if ($encryption === 'tls') {
+        $write('STARTTLS');
+        $expect($read(), '220');
+        if (!stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
+            throw new RuntimeException('Failed to enable TLS encryption.');
+        }
+        $write('EHLO ' . $hostname);
+        $expect($read(), '250');
+    }
+
+    if (!empty($smtp['username'])) {
+        $write('AUTH LOGIN');
+        $expect($read(), '334');
+        $write(base64_encode((string)$smtp['username']));
+        $expect($read(), '334');
+        $write(base64_encode((string)($smtp['password'] ?? '')));
+        $expect($read(), '235');
+    }
+
+    $write('MAIL FROM:<' . $fromEmail . '>');
+    $expect($read(), '250');
+    $write('RCPT TO:<' . $to . '>');
+    $expect($read(), '25'); // 250 or 251
+    $write('DATA');
+    $expect($read(), '354');
+
+    $headers = [
+        'Date: ' . date('r'),
+        'From: ' . sprintf('%s <%s>', $fromName, $fromEmail),
+        'To: ' . $to,
+        'Reply-To: ' . sprintf('%s <%s>', $replyName, $replyEmail),
+        'Subject: ' . $subject,
+        'MIME-Version: 1.0',
+        'Content-Type: text/plain; charset=utf-8',
+        'Content-Transfer-Encoding: 8bit',
+    ];
+
+    // Dot-stuffing: lines starting with "." must be escaped.
+    $safeBody = preg_replace('/^\./m', '..', str_replace(["\r\n", "\r", "\n"], "\r\n", $body));
+
+    $write(implode("\r\n", $headers) . "\r\n\r\n" . $safeBody . "\r\n.");
+    $expect($read(), '250');
+
+    $write('QUIT');
+    fclose($fp);
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     respond(false, 'Method not allowed.', 405);
 }
@@ -128,15 +231,31 @@ try {
     ];
     $body = implode("\r\n", $bodyLines);
 
-    $headers   = [];
-    $headers[] = 'From: ' . sprintf('%s <%s>', $mail['from_name'], $mail['from']);
-    $headers[] = 'Reply-To: ' . sprintf('%s <%s>', $name, $email);
-    $headers[] = 'Content-Type: text/plain; charset=utf-8';
-    $headers[] = 'MIME-Version: 1.0';
+    $smtp = $config['smtp'] ?? ['enabled' => false];
 
-    // Failure to email should not fail the request (data is already saved).
-    @mail($mail['to'], $subject, $body, implode("\r\n", $headers));
+    if (!empty($smtp['enabled'])) {
+        // Send through the configured SMTP server.
+        send_via_smtp(
+            $smtp,
+            $mail['from'],
+            $mail['from_name'],
+            $mail['to'],
+            $name,
+            $email,
+            $subject,
+            $body
+        );
+    } else {
+        // Fall back to PHP's built-in mail().
+        $headers   = [];
+        $headers[] = 'From: ' . sprintf('%s <%s>', $mail['from_name'], $mail['from']);
+        $headers[] = 'Reply-To: ' . sprintf('%s <%s>', $name, $email);
+        $headers[] = 'Content-Type: text/plain; charset=utf-8';
+        $headers[] = 'MIME-Version: 1.0';
+        @mail($mail['to'], $subject, $body, implode("\r\n", $headers));
+    }
 } catch (Throwable $e) {
+    // Failure to email should not fail the request (data is already saved).
     error_log('[hire-us] Mail error: ' . $e->getMessage());
 }
 

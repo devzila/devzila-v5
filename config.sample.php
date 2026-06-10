@@ -26,4 +26,16 @@ return [
         'from_name' => 'DevZila Website',
         'subject'   => 'New Hire Us request from {name}',
     ],
+
+    // ── SMTP transport ──
+    // Set 'enabled' => true to send via SMTP instead of PHP's mail().
+    'smtp' => [
+        'enabled'    => false,
+        'host'       => 'smtp.yourprovider.com',
+        'port'       => 587,            // 587 = STARTTLS, 465 = implicit SSL, 25 = none
+        'encryption' => 'tls',          // 'tls' | 'ssl' | 'none'
+        'username'   => 'smtp_user',
+        'password'   => 'smtp_password',
+        'timeout'    => 15,             // seconds
+    ],
 ];
