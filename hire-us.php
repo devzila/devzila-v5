@@ -2,7 +2,7 @@
 $pageTitle = 'Hire Us — DevZila Ruby on Rails Development Team';
 $pageDescription = "Tell us about your project. We'll get back within 24 hours with a brief and estimate.";
 $useSiteCss = false;
-$extraHead = '<link rel="stylesheet" href="/assets/hire-us.css">';
+$extraHead = '<link rel="stylesheet" href="/assets/hire-us.css?v=20260611">';
 $navServicesHref = '/#services';
 require __DIR__ . '/partials/header.php';
 ?>

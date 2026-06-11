@@ -2,7 +2,7 @@
 $pageTitle = 'DevZila — Ruby on Rails · React.js · AI Integration';
 $pageDescription = 'DevZila is a software development studio specializing in Ruby on Rails, React.js, and AI-powered web applications.';
 $useSiteCss = false;
-$extraHead = '<link rel="stylesheet" href="/assets/home.css">';
+$extraHead = '<link rel="stylesheet" href="/assets/home.css?v=20260611">';
 $navServicesHref = '#services';
 require __DIR__ . '/partials/header.php';
 ?>
