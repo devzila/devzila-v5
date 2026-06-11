@@ -28,6 +28,7 @@ $navServicesHref = $navServicesHref ?? '/#services';
 <link rel="stylesheet" href="/assets/site.css?v=20260611">
 <?php endif; ?>
 <?= $extraHead ?>
+<link rel="stylesheet" href="/assets/nav.css?v=20260611">
 </head>
 <body>
 
@@ -42,6 +43,10 @@ $navServicesHref = $navServicesHref ?? '/#services';
     </svg>
     <span class="logo-text">Dev<span>Zila</span></span>
   </a>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <label for="nav-toggle" class="nav-burger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </label>
   <ul class="nav-links">
     <li class="nav-dropdown">
       <a href="<?= htmlspecialchars($navServicesHref) ?>" aria-haspopup="true">Services</a>
