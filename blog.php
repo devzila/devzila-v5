@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/lib/db.php';
+require_once __DIR__ . '/lib/site.php';
 
 $categorySlug = isset($_GET['category']) ? trim((string) $_GET['category']) : '';
 $posts = [];
@@ -37,29 +37,61 @@ try {
     $dbError = true;
 }
 
-$pageTitle = $activeCategory
-    ? "{$activeCategory} — DevZila Blog"
-    : 'Blog — DevZila';
-$pageDescription = 'Insights on Ruby on Rails, Domain-Driven Design, frontend, and shipping maintainable software.';
-$navServicesHref = '/#services';
+if ($activeCategory) {
+    $pageTitle = "{$activeCategory} Articles — DevZila Blog";
+    $pageDescription = "Articles about {$activeCategory} from DevZila, the AI-first Ruby on Rails consultancy: practical guides and lessons from real projects.";
+    $pagePath = '/blog?category=' . rawurlencode($categorySlug);
+    $pageBreadcrumbs = [['Home', '/'], ['Blog', '/blog'], [$activeCategory]];
+} else {
+    $pageTitle = 'Blog: AI in Rails, Legacy Modernization & DDD — DevZila';
+    $pageDescription = 'Practical articles on adding AI to Ruby on Rails applications, modernizing legacy Rails, Domain-Driven Design and frontend, from the DevZila team.';
+    $pagePath = '/blog';
+    $pageBreadcrumbs = [['Home', '/'], ['Blog']];
+}
+
+// Unknown category, an empty category or a database problem: keep it out of the index.
+if (($categorySlug !== '' && (!$activeCategory || !$posts)) || $dbError) {
+    $pageRobots = 'noindex, follow';
+}
+
+$pageSchemaType = 'CollectionPage';
+if ($posts) {
+    $pageSchema = [[
+        '@type'     => 'Blog',
+        '@id'       => site_url('/blog#blog'),
+        'name'      => 'DevZila Blog',
+        'url'       => site_url('/blog'),
+        'publisher' => ['@id' => site_url('/#organization')],
+        'blogPost'  => array_map(
+            static fn (array $p): array => [
+                '@type'         => 'BlogPosting',
+                'headline'      => $p['title'],
+                'url'           => site_url('/blog/' . $p['slug']),
+                'datePublished' => date('c', (int) strtotime((string) ($p['published_at'] ?? $p['created_at']))),
+            ],
+            array_slice($posts, 0, 20)
+        ),
+    ]];
+}
+
 require __DIR__ . '/partials/header.php';
 ?>
 
-<header class="svc-header">
-  <div class="breadcrumb"><a href="/">Home</a> · Blog</div>
-  <div class="svc-label">DevZila Blog</div>
+<header class="page-hero">
+  <?= render_breadcrumbs($pageBreadcrumbs) ?>
+  <div class="eyebrow">DevZila Blog</div>
   <h1><?= $activeCategory ? e($activeCategory) : 'Notes on building better software' ?></h1>
-  <p>Practical insights on Ruby on Rails, Domain-Driven Design, frontend, and lessons from shipping real products.</p>
+  <p class="lede">Practical insights on AI in Ruby on Rails applications, legacy modernization, Domain-Driven Design, frontend and lessons from shipping real products.</p>
 </header>
 
 <div class="blog-wrap">
   <?php if ($categories): ?>
-  <div class="cat-pills">
+  <nav class="cat-pills" aria-label="Blog categories">
     <a class="cat-pill <?= $categorySlug === '' ? 'active' : '' ?>" href="/blog">All</a>
     <?php foreach ($categories as $c): ?>
-      <a class="cat-pill <?= $categorySlug === $c['slug'] ? 'active' : '' ?>" href="/blog?category=<?= e(urlencode($c['slug'])) ?>"><?= e($c['name']) ?></a>
+      <a class="cat-pill <?= $categorySlug === $c['slug'] ? 'active' : '' ?>" href="/blog?category=<?= e(rawurlencode($c['slug'])) ?>"><?= e($c['name']) ?></a>
     <?php endforeach; ?>
-  </div>
+  </nav>
   <?php endif; ?>
 
   <?php if ($dbError): ?>
@@ -83,6 +115,25 @@ require __DIR__ . '/partials/header.php';
       <?php endforeach; ?>
     </div>
   <?php endif; ?>
+</div>
+
+<section class="section section-sm">
+  <div class="eyebrow">Guides</div>
+  <h2 class="section-title">Start with the essentials</h2>
+  <div class="link-grid">
+    <a class="link-card" href="/ai-use-cases"><strong>AI Use Cases for Rails <?= icon('arrow-right') ?></strong><span>Nine patterns, how each is built, and its guardrails.</span></a>
+    <a class="link-card" href="/legacy-rails-modernization"><strong>Legacy Rails Modernization <?= icon('arrow-right') ?></strong><span>Rewrite or modernize? A side-by-side comparison.</span></a>
+    <a class="link-card" href="/ai-glossary"><strong>AI Glossary for Rails Teams <?= icon('arrow-right') ?></strong><span>RAG, embeddings, agents and MCP in plain language.</span></a>
+  </div>
+</section>
+
+<div class="cta-banner">
+  <h2>Have a Rails application that should be doing more?</h2>
+  <p>Tell us about it. We reply within 24 hours.</p>
+  <div class="cta-actions">
+    <a href="/hire-us" class="btn-primary">Hire us <?= icon('arrow-right') ?></a>
+    <a href="<?= e(SITE_BOOKING) ?>" target="_blank" rel="noopener noreferrer" class="btn-ghost">Book a call</a>
+  </div>
 </div>
 
 <?php require __DIR__ . '/partials/footer.php'; ?>

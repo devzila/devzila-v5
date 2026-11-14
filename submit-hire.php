@@ -149,6 +149,11 @@ $message = trim((string)($_POST['message'] ?? ''));
 $budget  = trim((string)($_POST['budget']  ?? ''));
 $source  = trim((string)($_POST['source']  ?? ''));
 
+// Optional "What can we help with?" topic. There is no dedicated column for it,
+// so it is kept as the first line of the stored message.
+$interest = trim((string)($_POST['interest'] ?? ''));
+$interest = mb_substr(preg_replace('/[\r\n]+/', ' ', $interest) ?? '', 0, 100);
+
 // ── Validate ──
 $errors = [];
 if ($name === '' || mb_strlen($name) > 150) {
@@ -162,6 +167,10 @@ if ($message === '') {
 }
 if (!empty($errors)) {
     respond(false, 'Please provide ' . implode(', ', $errors) . '.', 422);
+}
+
+if ($interest !== '') {
+    $message = "Interested in: {$interest}\n\n" . $message;
 }
 
 $ip        = $_SERVER['REMOTE_ADDR'] ?? null;

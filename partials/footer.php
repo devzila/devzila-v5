@@ -7,24 +7,29 @@
  */
 $extraScripts = $extraScripts ?? '';
 ?>
+</main>
+
 <!-- FOOTER -->
-<footer>
+<footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="/" class="nav-logo" style="text-decoration:none;">
-          <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="36" height="36" rx="8" fill="rgb(66 101 164)"/>
-            <path d="M7 7h14c5 0 8 3 8 7s-3 7-8 7H7V7z" fill="white"/>
-            <rect x="7" y="11" width="7" height="6" fill="rgb(66 101 164)"/>
-            <path d="M7 24h8l8 5H7v-5z" fill="white"/>
-          </svg>
-          <span class="logo-text">Dev<span>Zila</span></span>
-        </a>
-        <p>Software development studio specializing in Ruby on Rails, React.js, and AI-powered web applications.</p>
+        <?= logo_link() ?>
+        <p>The AI-first Ruby on Rails consultancy. We modernize legacy Rails applications and make them AI-ready — with strategy, integration and automation built on senior Rails engineering.</p>
+        <a class="footer-mail" href="mailto:<?= e(SITE_EMAIL) ?>"><?= e(SITE_EMAIL) ?></a>
       </div>
       <div class="footer-col">
-        <h5>Development</h5>
+        <p class="footer-title">AI Enablement</p>
+        <ul>
+          <li><a href="/ai-transformation-strategy">AI Transformation &amp; Strategy</a></li>
+          <li><a href="/ai-integration-automation">AI Integration &amp; Automation</a></li>
+          <li><a href="/legacy-rails-modernization">Legacy Rails Modernization</a></li>
+          <li><a href="/ai-readiness-assessment">AI Readiness Assessment</a></li>
+          <li><a href="/ai-use-cases">AI Use Cases for Rails</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-title">Rails Engineering</p>
         <ul>
           <li><a href="/rails-development">Rails Development</a></li>
           <li><a href="/rails-upgrades">Rails Upgrades</a></li>
@@ -33,32 +38,32 @@ $extraScripts = $extraScripts ?? '';
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Workshops</h5>
+        <p class="footer-title">Workshops</p>
         <ul>
+          <li><a href="/ai-for-rails-workshop">AI for Rails Teams</a></li>
           <li><a href="/ddd-workshops">DDD Workshops</a></li>
           <li><a href="/event-storming-workshops">Event Storming</a></li>
-          <li><a href="/code-mentoring">Code Mentoring</a></li>
           <li><a href="/hotwire-workshop">Hotwire Workshop</a></li>
+          <li><a href="/code-mentoring">Code Mentoring</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Company</h5>
+        <p class="footer-title">Company</p>
         <ul>
-          <li><a href="/">Home</a></li>
           <li><a href="/why-devzila">Why DevZila</a></li>
           <li><a href="/blog">Blog</a></li>
-          <li><a href="/#work">Our Work</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/ai-glossary">AI Glossary</a></li>
           <li><a href="/hire-us">Hire Us</a></li>
-          <li><a href="mailto:hello@devzila.com">Contact</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <?= date('Y') ?> DevZila · devzila.com</span>
+      <span>© <?= date('Y') ?> DevZila · AI enablement and Ruby on Rails engineering</span>
       <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="mailto:hello@devzila.com">hello@devzila.com</a>
+        <a href="/sitemap.xml">Sitemap</a>
+        <a href="/llms.txt">llms.txt</a>
+        <a href="mailto:<?= e(SITE_EMAIL) ?>">Contact</a>
       </div>
     </div>
   </div>

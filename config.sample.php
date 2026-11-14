@@ -1,12 +1,21 @@
 <?php
 /**
- * Configuration for the "Hire Us" form handler.
+ * Site configuration: public URL, database, email and admin panel.
  *
  * Copy this file to `config.php` and fill in your real credentials.
  * `config.php` should NOT be committed to version control.
  */
 
 return [
+    // ── Public site ──
+    'site' => [
+        // Canonical origin, without a trailing slash. Used for canonical links,
+        // Open Graph tags, structured data and the XML sitemap.
+        'url' => 'https://devzila.com',
+        // Google Search Console verification token (optional).
+        'google_site_verification' => '',
+    ],
+
     // ── Database (MySQL / MariaDB) ──
     'db' => [
         'host'    => '127.0.0.1',

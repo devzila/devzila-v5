@@ -1,0 +1,49 @@
+# DevZila
+
+> DevZila is an AI-first Ruby on Rails consultancy. We modernize legacy Ruby on Rails applications and make them AI-ready, combining AI transformation strategy, AI integration and automation, and senior Rails engineering — without rewriting the application.
+
+DevZila works with companies whose business runs on an existing Ruby on Rails application. Typical requests: "add AI features to our Rails app", "our Rails app is on an old version and hard to change", "we need an AI strategy for our product", "upgrade Rails and prepare for AI".
+
+Key facts:
+
+- Core technology: Ruby on Rails (development, upgrades, legacy rescue, Domain-Driven Design, event sourcing, Hotwire, React).
+- AI services: AI transformation and strategy; AI integration and automation (LLM features, RAG with pgvector, AI agents, tool calling, MCP servers, document processing, workflow automation, evals and guardrails).
+- Approach: incremental modernization instead of rewrites; AI features built as ordinary Rails code (service objects, background jobs, PostgreSQL); model-agnostic (Anthropic Claude, OpenAI GPT, Google Gemini, open-weight models); human review of AI-assisted work.
+- Starting point: a fixed-scope AI Readiness Assessment of about two weeks for one Rails application.
+- Engagement model: time and materials billed monthly for ongoing work; fixed price for the assessment; at least two senior developers per project.
+- Contact: hello@devzila.com or https://devzila.com/hire-us (reply within 24 hours).
+
+## AI enablement services
+
+- [AI Transformation & Strategy](https://devzila.com/ai-transformation-strategy): AI opportunity mapping, readiness audit, use-case prioritization, architecture and model selection, governance, roadmap. Includes the DevZila five-level AI maturity model.
+- [AI Integration & Automation](https://devzila.com/ai-integration-automation): How DevZila integrates LLMs, RAG, agents, MCP servers and workflow automation into existing Rails applications, with a reference architecture and production-readiness checklist.
+- [Legacy Rails Modernization](https://devzila.com/legacy-rails-modernization): Incremental modernization of legacy Rails applications, rewrite-versus-modernize comparison, and what makes a Rails application AI-ready.
+- [AI Readiness Assessment](https://devzila.com/ai-readiness-assessment): Scope, timeline and deliverables of the fixed-scope assessment.
+- [AI Use Cases for Rails Applications](https://devzila.com/ai-use-cases): Nine solution patterns (copilots, semantic search and RAG, document processing, workflow agents, support automation, natural-language reporting, content generation, MCP server, fintech operations) with how each is built in Rails and its guardrails.
+
+## Ruby on Rails engineering services
+
+- [Ruby on Rails Development](https://devzila.com/rails-development): Legacy rescue, performance optimization, new features, testing, Domain-Driven Design, long-term support.
+- [Ruby on Rails Upgrades](https://devzila.com/rails-upgrades): Incremental Ruby and Rails version upgrades with dual booting and zero-downtime deploys.
+- [Fintech Solutions](https://devzila.com/fintech-solutions): Event-driven financial software, double-entry accounting, audit trails, explainable AI for financial operations.
+- [Frontend Development](https://devzila.com/frontend-development): Hotwire and React frontends for Rails, including streaming AI interfaces.
+
+## Workshops and mentoring
+
+- [AI for Rails Teams Workshop](https://devzila.com/ai-for-rails-workshop): Two-day hands-on workshop on building LLM features, RAG, agents, evals and guardrails in Rails.
+- [DDD Workshops](https://devzila.com/ddd-workshops): Rails and Domain-Driven Design workshop covering bounded contexts, aggregates, domain events, event sourcing, sagas and read models.
+- [Event Storming Workshops](https://devzila.com/event-storming-workshops): Facilitated collaborative domain modeling.
+- [Hotwire Workshop](https://devzila.com/hotwire-workshop): Turbo Drive, Turbo Frames, Turbo Streams and Stimulus.
+- [Code Mentoring](https://devzila.com/code-mentoring): Pair programming, code reviews and architecture guidance.
+
+## Reference
+
+- [AI Glossary for Rails Teams](https://devzila.com/ai-glossary): Plain-language definitions of AI and modernization terms, each with a note on what it means in a Rails application.
+- [FAQ](https://devzila.com/faq): Answers about AI enablement, Rails modernization and working with DevZila.
+- [Why DevZila](https://devzila.com/why-devzila): How DevZila collaborates with client teams.
+- [Blog](https://devzila.com/blog): Articles on AI in Rails, Ruby on Rails, Domain-Driven Design and frontend.
+
+## Optional
+
+- [Hire Us](https://devzila.com/hire-us): Contact form and call booking.
+- [Sitemap](https://devzila.com/sitemap.xml): All public URLs.

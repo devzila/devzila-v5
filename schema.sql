@@ -69,7 +69,8 @@ INSERT INTO blog_categories (name, slug) VALUES
   ('Ruby on Rails', 'ruby-on-rails'),
   ('Domain-Driven Design', 'domain-driven-design'),
   ('Frontend', 'frontend'),
-  ('Company News', 'company-news');
+  ('Company News', 'company-news'),
+  ('AI Enablement', 'ai-enablement');
 
 INSERT INTO blog_posts (title, slug, excerpt, body, author_id, category_id, status, published_at) VALUES
   ('Welcome to the DevZila Blog',

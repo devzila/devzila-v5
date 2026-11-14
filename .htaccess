@@ -8,6 +8,12 @@ RewriteEngine On
 # Use index.php as the directory index so "/" serves the homepage
 DirectoryIndex index.php
 
+# Text files (robots.txt, llms.txt, CSS, SVG) are UTF-8
+AddDefaultCharset UTF-8
+
+# Unknown URLs get the branded 404 page (with a real 404 status)
+ErrorDocument 404 /404.php
+
 # Pass HTTP Basic Auth credentials through to PHP (needed by the admin panel
 # on some CGI/FastCGI setups).
 CGIPassAuth On
@@ -24,6 +30,9 @@ RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 <Files "config.sample.php">
   Require all denied
 </Files>
+<Files "LocalValetDriver.php">
+  Require all denied
+</Files>
 # Never serve the include partials or library files directly
 RewriteRule ^(partials|lib)/ - [F,L]
 
@@ -37,10 +46,34 @@ RewriteRule ^ /? [R=301,L]
 RewriteCond %{THE_REQUEST} \s/+([^.\s?]+)\.php[\s?] [NC]
 RewriteRule ^ /%1 [R=301,L]
 
-# 3) Pretty blog post URLs: /blog/{slug} -> blog-post.php?slug={slug}
-RewriteRule ^blog/([A-Za-z0-9_-]+)/?$ blog-post.php?slug=$1 [L,QSA]
+# 3) Redirect "/page/" to "/page" so every page has exactly one URL
+#    (real directories such as /admin/ are left alone)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{THE_REQUEST} \s/+([^\s?]*[^\s?/])/+[\s?]
+RewriteRule ^ /%1 [R=301,L]
 
-# 4) Internally map an extensionless URL to its .php file (no redirect, so POST works)
+# 4) XML sitemap: /sitemap.xml -> sitemap.php
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+# 5) Pretty blog post URLs: /blog/{slug} -> blog-post.php?slug={slug}
+RewriteRule ^blog/([A-Za-z0-9_-]+)$ blog-post.php?slug=$1 [L,QSA]
+
+# 6) Internally map an extensionless URL to its .php file (no redirect, so POST works)
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^(.+?)/?$ $1.php [L]
+RewriteRule ^(.+)$ $1.php [L]
+
+# ── Performance: compression and browser caching ──
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/xml application/javascript application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # CSS/JS URLs carry a ?v=<mtime> version, so they are safe to cache for long
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 month"
+</IfModule>
