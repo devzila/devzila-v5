@@ -88,8 +88,8 @@ $siteVerification = (string) (app_config()['site']['google_site_verification'] ?
 <meta name="twitter:description" content="<?= e($pageDescription) ?>">
 <meta name="twitter:image" content="<?= e($ogImageUrl) ?>">
 
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.png" type="image/png" sizes="120x120">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
