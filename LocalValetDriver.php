@@ -57,6 +57,25 @@ class LocalValetDriver extends ValetDriver
             return $sitePath . '/index.php';
         }
 
+        $query = ! empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '';
+
+        // Legacy static URLs: /page.html -> /page. Real files (the Google
+        // verification HTML) are served as static files and never reach here.
+        if (preg_match('/\.html$/i', $uri)) {
+            $target = preg_replace('/\.html$/i', '', $uri) ?: '/';
+            if ($target === '/index') {
+                $target = '/';
+            }
+            header('Location: ' . $target . $query, true, 301);
+            exit;
+        }
+
+        // The blog renderer is not a public URL.
+        if ($uri === '/blog-post' || $uri === '/blog-post.php') {
+            header('Location: /blog' . $query, true, 301);
+            exit;
+        }
+
         // 1. Redirect "/index" or "/index.php" to "/"
         if ($uri === '/index' || $uri === '/index.php') {
             header('Location: /', true, 301);

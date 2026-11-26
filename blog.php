@@ -49,8 +49,9 @@ if ($activeCategory) {
     $pageBreadcrumbs = [['Home', '/'], ['Blog']];
 }
 
-// Unknown category, an empty category or a database problem: keep it out of the index.
-if (($categorySlug !== '' && (!$activeCategory || !$posts)) || $dbError) {
+// Category filters repeat the blog index. Keep them usable, but do not ask
+// search engines to index a second URL for the same posts.
+if ($categorySlug !== '' || $dbError) {
     $pageRobots = 'noindex, follow';
 }
 

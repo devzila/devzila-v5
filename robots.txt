@@ -1,5 +1,6 @@
 # DevZila — https://devzila.com
 # Search engines and AI assistants are welcome to crawl and cite public pages.
+# A concise brief for assistants: https://devzila.com/llms.txt
 
 User-agent: *
 Allow: /

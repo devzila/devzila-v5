@@ -3,8 +3,8 @@ http_response_code(404);
 
 $pageTitle = 'Page not found — DevZila';
 $pageDescription = 'The page you are looking for does not exist or has moved.';
-$pagePath = '/404';
 $pageRobots = 'noindex, follow';
+header('X-Robots-Tag: noindex, follow');
 require __DIR__ . '/partials/header.php';
 ?>
 

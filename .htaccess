@@ -5,6 +5,17 @@ RewriteEngine On
 # If the site is served from a subdirectory, set this to that path, e.g. /myapp/
 # RewriteBase /
 
+# One public host. www and plain http fold into https://devzila.com in a single hop.
+# Local hosts (Herd, localhost) are not matched. A TLS-terminating proxy that sets
+# X-Forwarded-Proto is not redirected again.
+RewriteCond %{HTTP_HOST} ^www\.devzila\.com$ [NC]
+RewriteRule ^ https://devzila.com%{REQUEST_URI} [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^devzila\.com$ [NC]
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+RewriteRule ^ https://devzila.com%{REQUEST_URI} [R=301,L]
+
 # Use index.php as the directory index so "/" serves the homepage
 DirectoryIndex index.php
 
@@ -37,6 +48,18 @@ RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 RewriteRule ^(partials|lib)/ - [F,L]
 
 # ── Clean URLs ──
+
+# 0) The site used to be static HTML. Send those URLs to the current page.
+#    Real files such as the Google verification HTML are left untouched.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^index\.html$ / [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)\.html$ /$1 [R=301,L]
+
+# The blog renderer is not a public URL. Send it to the blog index in one hop
+# so it does not redirect to /blog-post and then 404.
+RewriteRule ^blog-post(\.php)?$ /blog [R=301,L]
 
 # 1) Redirect "/index" or "/index.php" to "/"
 RewriteCond %{THE_REQUEST} \s/+index(\.php)?[\s?] [NC]

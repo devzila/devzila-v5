@@ -2,8 +2,8 @@
 /**
  * XML sitemap, served at /sitemap.xml (see .htaccess).
  *
- * Static pages are listed below; published blog posts and their categories
- * are added from the database when it is available.
+ * Static pages are listed below. Published blog posts are added from the
+ * database when it is available. Only canonical, indexable URLs belong here.
  */
 
 declare(strict_types=1);
@@ -57,19 +57,6 @@ try {
         $urls[] = [
             'loc'     => site_url('/blog/' . $post['slug']),
             'lastmod' => $post['modified'] ? date('Y-m-d', (int) strtotime((string) $post['modified'])) : null,
-        ];
-    }
-
-    $categories = $pdo->query(
-        'SELECT DISTINCT c.slug
-         FROM blog_categories c
-         JOIN blog_posts p ON p.category_id = c.id AND p.status = "published"
-         ORDER BY c.slug'
-    )->fetchAll();
-    foreach ($categories as $category) {
-        $urls[] = [
-            'loc'     => site_url('/blog?category=' . rawurlencode((string) $category['slug'])),
-            'lastmod' => null,
         ];
     }
 } catch (Throwable $ex) {

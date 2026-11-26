@@ -121,7 +121,7 @@ function site_topics(): array
 function schema_organization(): array
 {
     return [
-        '@type'       => 'Organization',
+        '@type'       => ['Organization', 'ProfessionalService'],
         '@id'         => site_url('/#organization'),
         'name'        => SITE_NAME,
         'url'         => site_url('/'),

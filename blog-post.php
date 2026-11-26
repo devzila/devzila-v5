@@ -46,6 +46,7 @@ if ($slug !== '') {
 
 if (!$post) {
     http_response_code(404);
+    header('X-Robots-Tag: noindex, follow');
     $pageTitle = 'Post not found — DevZila Blog';
     $pageDescription = 'The requested blog post could not be found.';
     $pageRobots = 'noindex, follow';

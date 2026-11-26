@@ -35,7 +35,11 @@ $navServicesHref = $navServicesHref ?? '/#services';
 
 $canonicalUrl = site_url($pagePath);
 $ogImageUrl   = site_url($ogImage);
-$isIndexable  = stripos($pageRobots, 'noindex') === false;
+$statusCode   = http_response_code() ?: 200;
+# A 404 must not name some other URL as its canonical. That is what Search
+# Console reports as "Alternate page with proper canonical tag".
+$emitCanonical = $statusCode < 400;
+$isIndexable  = $emitCanonical && stripos($pageRobots, 'noindex') === false;
 
 $schemaNodes = [schema_organization(), schema_website()];
 if ($isIndexable) {
@@ -66,7 +70,10 @@ $siteVerification = (string) (app_config()['site']['google_site_verification'] ?
 <title><?= e($pageTitle) ?></title>
 <meta name="description" content="<?= e($pageDescription) ?>">
 <meta name="robots" content="<?= e($pageRobots) ?>">
+<?php if ($emitCanonical): ?>
 <link rel="canonical" href="<?= e($canonicalUrl) ?>">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable site summary">
+<?php endif; ?>
 <meta name="author" content="<?= e(SITE_NAME) ?>">
 <meta name="theme-color" content="#0a0a0b">
 <?php if ($siteVerification !== ''): ?>
@@ -77,7 +84,9 @@ $siteVerification = (string) (app_config()['site']['google_site_verification'] ?
 <meta property="og:type" content="<?= e($ogType) ?>">
 <meta property="og:title" content="<?= e($pageTitle) ?>">
 <meta property="og:description" content="<?= e($pageDescription) ?>">
+<?php if ($emitCanonical): ?>
 <meta property="og:url" content="<?= e($canonicalUrl) ?>">
+<?php endif; ?>
 <meta property="og:image" content="<?= e($ogImageUrl) ?>">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
